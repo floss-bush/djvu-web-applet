@@ -6,14 +6,19 @@
             <name>javadjvu</name>
             <folders>
                 <source-folder>
+                    <label>src</label>
+                    <type>java</type>
+                    <location>src</location>
+                </source-folder>
+                <source-folder>
                     <label>doc</label>
                     <type>doc_root</type>
                     <location>doc</location>
                 </source-folder>
                 <source-folder>
-                    <label>src</label>
-                    <type>java</type>
-                    <location>src</location>
+                    <label>WEB-INF</label>
+                    <type>web_inf</type>
+                    <location>doc/WEB-INF</location>
                 </source-folder>
             </folders>
             <ide-actions>
@@ -48,6 +53,10 @@
                     <source-folder style="tree">
                         <label>Web Pages</label>
                         <location>doc</location>
+                    </source-folder>
+                    <source-folder style="tree">
+                        <label>WEB-INF Content</label>
+                        <location>doc/WEB-INF</location>
                     </source-folder>
                     <source-folder style="packages">
                         <label>src</label>

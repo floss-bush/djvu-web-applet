@@ -21,6 +21,7 @@
 				<filename name="${package.djvubean.dir}/*.java" />
 				<filename name="${package.djview.dir}/*.java" />
 				<filename name="${package.djview.frame.dir}/*.java" />
+                                <filename name="${package.djvubean.locale}/*.java" />
 				<selector if="addon.applet">
 					<filename name="${addon.applet}" />
 				</selector>
@@ -64,6 +65,7 @@
 				<filename name="${package.djvubean.dir}/*.java" />
 				<filename name="${package.djview.dir}/*.java" />
 				<filename name="${package.djview.frame.dir}/*.java" />
+                                <filename name="${package.djvubean.locale}/*.java" />
 				<selector if="addon.applet">
 					<filename name="${addon.applet}" />
 				</selector>
@@ -113,6 +115,7 @@
 			         <include name="${package.djvu.dir}/**" />
 			         <include name="${package.djvubean.dir}/**" />
 			         <include name="${package.djview.dir}/**" />
+                                 <include name="${package.djvubean.locale}/**" />
 			         <exclude name="${package.djview.frame.dir}/**" />
 			</fileset>
 			<manifest>
@@ -173,6 +176,7 @@
 			         <include name="${package.djvubean.dir}/**" />
 			         <include name="${package.djview.dir}/**" />
 			         <exclude name="${package.djview.frame.dir}/**" />
+                                 <include name="${package.djvubean.locale}/**" />
 			</fileset>
 			<manifest>
 				<attribute name="Main-Class" value="${package.djview.main}" />
