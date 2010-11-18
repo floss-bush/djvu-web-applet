@@ -244,6 +244,7 @@ public class DjVuBean
      * Creates a new DjVuBean object.
      */
     public DjVuBean() {
+
         properties = new Properties() {
 
             public Object put(

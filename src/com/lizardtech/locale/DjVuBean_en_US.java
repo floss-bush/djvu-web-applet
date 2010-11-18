@@ -8,11 +8,11 @@ import java.util.*;
  */
 public class DjVuBean_en_US extends ListResourceBundle {
    {
-      System.out.println("loading Strings");
+      System.out.println("loading Strings en_US for DjVuBean");
    }
 
    public Object [][] getContents() {
-      System.out.println("getting Strings");
+      System.out.println("getting Strings en_US for DjVuBean");
 
       return contents;
    }
