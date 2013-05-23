@@ -1,8 +1,8 @@
-JavaDjVu - Release 0.8.09
+JavaDjVu - Release 0.8.10
 
 This package contains the source code and documentation for JavaDjVu.  JavaDjVu
 consists of a reference library and GUI code that may be used to view and
-navigate DjVu documents from JVM 1.1 compliant virtual machines.
+navigate DjVu documents for JVM 1.1 and up compliant virtual machines.
 
 BUILD REQUIREMENTS:
 
@@ -145,5 +145,8 @@ ADVANCED BUILD INSTRUCTIONS:
 		decoding of the "NAVM" chunks, and using the ouline to 
 		navigate multi-page DjVu documents.
 
-
+TRANSLATION :
+	
+	To translate the applet to your desired language. Create a new properties file
+	in com/lizardtech/localization either via text doc or via your IDE.
 
