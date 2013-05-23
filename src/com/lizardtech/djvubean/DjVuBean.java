@@ -69,22 +69,23 @@ public class DjVuBean
         extends Panel
         implements PropertyChangeListener, DjVuInterface, java.io.Serializable, Runnable {
     //~ Static fields/initializers ---------------------------------------------
-    private ResourceBundle _resbundle = ResourceBundle.getBundle("com.lizardtech.locale.DjVuBean", Locale.getDefault());
+
+    private static ResourceBundle _resbundle = ResourceBundle.getBundle("com/lizardtech/locale/DjVuBean", Locale.getDefault());
 
     // Just an empty string.
     private static final String NILL = "";
     /** String used for scrolling up. */
     public static String SCROLL_UP = "";
     /** String used for scrolling down. */
-    public static String SCROLL_DOWN = "";
+    public static String SCROLL_DOWN = _resbundle.getString("DOWN");
     /** String used for scrolling left. */
-    public static String SCROLL_LEFT = "";
+    public static String SCROLL_LEFT = _resbundle.getString("LEFT");
     /** String used for scrolling right. */
-    public static String SCROLL_RIGHT = "";
+    public static String SCROLL_RIGHT = _resbundle.getString("RIGHT");
     /** String used for scrolling page up. */
-    public static String SCROLL_PAGE_UP = "";
+    public static String SCROLL_PAGE_UP = _resbundle.getString("UP");
     /** String used for scrolling down. */
-    public static String SCROLL_PAGE_DOWN = "";
+    public static String SCROLL_PAGE_DOWN = _resbundle.getString("PAGE_DOWN");
     /** Magic scale value used to zoom to fit width. */
     public static final int FIT_WIDTH = -1;
     /** Magic scale value used to zoom to fit page. */
@@ -116,17 +117,17 @@ public class DjVuBean
     /** String used for selecting 25% zoom. */
     public static final String ZOOM25 = "25%";
     /** String used for selecting fit width zoom. */
-    public static String ZOOM_FIT_WIDTH = "";
+    public static String ZOOM_FIT_WIDTH = _resbundle.getString("FIT_WIDTH");
     /** String used for selecting fit page zoom. */
-    public static String ZOOM_FIT_PAGE = "";
+    public static String ZOOM_FIT_PAGE = _resbundle.getString("FIT_PAGE");
     /** String used for selecting fit one to one zoom. */
-    public static String ZOOM_ONE_TO_ONE = "";
+    public static String ZOOM_ONE_TO_ONE = _resbundle.getString("ONE_TO_ONE");
     /** String used for selecting stretch zoom */
-    public static String ZOOM_STRETCH = "";
+    public static String ZOOM_STRETCH = _resbundle.getString("ZOOM_STRETCH");
     /** String used for selecting zoom in */
-    public static String ZOOM_IN = "";
+    public static String ZOOM_IN = _resbundle.getString("ZOOM_IN");
     /** String used for selecting zoom out */
-    public static String ZOOM_OUT = "";
+    public static String ZOOM_OUT = _resbundle.getString("ZOOM_OUT");
     /** The list of strings standard zoom settings. */
     public static final String[] ZOOM_STANDARD_LIST = {ZOOM300, ZOOM150, ZOOM100, ZOOM75, ZOOM50, ZOOM25};
     /** The list of strings for the setZoom() method. */
@@ -134,21 +135,21 @@ public class DjVuBean
     /** The list of strings for the setZoom() method. */
     public static final String[] ZOOM_BUTTON_LIST = {ZOOM_IN, ZOOM_OUT};
     /** Navigate to the first page. */
-    public static String FIRST_PAGE = "";
+    public static String FIRST_PAGE = _resbundle.getString("FIRST_PAGE");
     /** Navigate to the previous page. */
-    public static String PREV_PAGE = "";
+    public static String PREV_PAGE = _resbundle.getString("PREVIOUS_PAGE");
     /** Navigate to the next page. */
-    public static String NEXT_PAGE = "";
+    public static String NEXT_PAGE = _resbundle.getString("NEXT_PAGE");
     /** Navigate to the last page. */
-    public static String LAST_PAGE = "";
+    public static String LAST_PAGE = _resbundle.getString("LAST_PAGE");
     /** This is a list of special values used when navigating documents. */
     public static final String[] NAVIGATE_LIST = {FIRST_PAGE, PREV_PAGE, NEXT_PAGE, LAST_PAGE};
     /** String used for selecting SINGLE page display. */
-    public static String SINGLE = "";
+    public static String SINGLE = _resbundle.getString("SINGLE_PAGE");
     /** String used for selecting book display. */
-    public static String BOOK = "";
+    public static String BOOK = _resbundle.getString("BOOK");
     /** String used for selecting book with cover page display. */
-    public static String COVER = "";
+    public static String COVER = _resbundle.getString("COVER");
     /** The list of strings page layout settings. */
     public static final String[] PAGE_LAYOUT_LIST = {SINGLE, BOOK, COVER};
     /** This mask is used for backwards searches. */
@@ -260,32 +261,6 @@ public class DjVuBean
                 return retval;
             }
         };
-
-        //localization
-        this.SCROLL_UP = this._resbundle.getString("up");
-        this.SCROLL_DOWN = this._resbundle.getString("down");
-        this.SCROLL_RIGHT = this._resbundle.getString("right");
-        this.SCROLL_LEFT = this._resbundle.getString("left");
-
-        this.SCROLL_PAGE_UP = this._resbundle.getString("page up");
-        this.SCROLL_PAGE_DOWN = this._resbundle.getString("page down");
-
-        this.ZOOM_FIT_WIDTH = this._resbundle.getString("page width");
-        this.ZOOM_FIT_PAGE = this._resbundle.getString("fit page");
-
-        this.ZOOM_ONE_TO_ONE = this._resbundle.getString("one to one");
-        this.ZOOM_STRETCH = this._resbundle.getString("stretch");
-        this.ZOOM_IN = this._resbundle.getString("zoom in");
-        this.ZOOM_OUT = this._resbundle.getString("zoom out");
-
-        this.FIRST_PAGE = this._resbundle.getString("first page");
-        this.PREV_PAGE = this._resbundle.getString("previous page");
-        this.NEXT_PAGE = this._resbundle.getString("next page");
-        this.LAST_PAGE = this._resbundle.getString("last page");
-
-        this.SINGLE = this._resbundle.getString("single page");
-        this.BOOK = this._resbundle.getString("book");
-        this.COVER = this._resbundle.getString("cover");
 
         change = new PropertyChangeSupport(this);
         textArea.setEditable(false);

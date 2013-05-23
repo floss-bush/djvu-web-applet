@@ -4,11 +4,20 @@
     <configuration>
         <general-data xmlns="http://www.netbeans.org/ns/freeform-project/1">
             <name>javadjvu</name>
+        </general-data>
+        <general-data xmlns="http://www.netbeans.org/ns/freeform-project/2">
+            <name>javadjvu</name>
             <folders>
+                <source-folder>
+                    <label>javadjvu</label>
+                    <location>.</location>
+                    <encoding>UTF-8</encoding>
+                </source-folder>
                 <source-folder>
                     <label>src</label>
                     <type>java</type>
                     <location>src</location>
+                    <encoding>UTF-8</encoding>
                 </source-folder>
                 <source-folder>
                     <label>doc</label>
@@ -48,6 +57,11 @@
                     <target>package</target>
                 </action>
             </ide-actions>
+            <export>
+                <type>folder</type>
+                <location>dist</location>
+                <build-target>release.jarframe</build-target>
+            </export>
             <view>
                 <items>
                     <source-folder style="tree">
@@ -82,13 +96,15 @@
         <java-data xmlns="http://www.netbeans.org/ns/freeform-project-java/1">
             <compilation-unit>
                 <package-root>src</package-root>
+                <classpath mode="compile">src/locale</classpath>
+                <built-to>dist</built-to>
                 <source-level>1.3</source-level>
             </compilation-unit>
         </java-data>
         <web-data xmlns="http://www.netbeans.org/ns/freeform-project-web/1">
             <web-module>
                 <doc-root>doc</doc-root>
-                <classpath>src</classpath>
+                <classpath>src/locale</classpath>
                 <context-path/>
                 <j2ee-spec-level>1.3</j2ee-spec-level>
             </web-module>

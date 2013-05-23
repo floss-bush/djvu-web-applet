@@ -14,14 +14,23 @@
 		<mkdir dir="${debug.classes.dir}" />
 		<mkdir dir="doc" />
 	</target>
-	<target name="release.compile" description="compile base the source" depends="init">
-		<javac srcdir="src" destdir="${release.classes.dir}" optimize="${javac.optimize}" debug="off" target="${javac.target}" source="${javac.source}">
+        
+        <target name="copy_translations">
+            <copy todir="${release.classes.dir}">
+               <fileset dir="src">
+                  <include name="**/*.properties" />
+               </fileset>
+            </copy>                         
+        </target>
+        
+	<target name="release.compile" description="compile base the source" depends="init, copy_translations">
+		<javac srcdir="src" destdir="${release.classes.dir}" optimize="${javac.optimize}" debug="on" target="${javac.target}" source="${javac.source}" listfiles="on">
 			<or>
 				<filename name="${package.djvu.dir}/*.java" />
 				<filename name="${package.djvubean.dir}/*.java" />
 				<filename name="${package.djview.dir}/*.java" />
 				<filename name="${package.djview.frame.dir}/*.java" />
-                                <filename name="${package.djvubean.locale}/*.java" />
+                                <filename name="${package.djvubean.locale}/*.properties" />
 				<selector if="addon.applet">
 					<filename name="${addon.applet}" />
 				</selector>
@@ -45,6 +54,7 @@
 				</selector>
 			</or>
 		</javac>
+                
                 <copy todir="${release.classes.dir}" >  
  		        <fileset dir="src">
 				<selector if="addon.toolbar">
@@ -52,20 +62,22 @@
 				</selector>
                         </fileset>
                 </copy>              
+                
                 <copy todir="${build.dir}" >  
  		        <fileset dir="${release.classes.dir}">
                                 <filename name="*.class" />
+                                <filename name="*.properties" />
                         </fileset>
                 </copy>              
 	</target>
-	<target name="debug.compile" description="compile base the source" depends="init">
-		<javac srcdir="src" destdir="${debug.classes.dir}" optimize="off" debug="on" target="${javac.target}" source="${javac.source}">
+	<target name="debug.compile" description="compile base the source" depends="init, copy_translations">
+		<javac srcdir="src" destdir="${debug.classes.dir}" optimize="off" debug="on" target="${javac.target}" source="${javac.source}"  listfiles="on">
 			<or>
 				<filename name="${package.djvu.dir}/*.java" />
 				<filename name="${package.djvubean.dir}/*.java" />
 				<filename name="${package.djview.dir}/*.java" />
 				<filename name="${package.djview.frame.dir}/*.java" />
-                                <filename name="${package.djvubean.locale}/*.java" />
+                                <filename name="${package.djvubean.locale}/*.properties" />
 				<selector if="addon.applet">
 					<filename name="${addon.applet}" />
 				</selector>
@@ -91,6 +103,7 @@
 		</javac>
                 <copy todir="${debug.classes.dir}" >  
  		        <fileset dir="src">
+                                <include name="**/*.properties"/>
 				<selector if="addon.toolbar">
                                          <filename name="com/lizardtech/djvubean/toolbar/*.djvu" />
 				</selector>
@@ -99,6 +112,7 @@
                 <copy todir="${debug.dir}" >  
  		        <fileset dir="${debug.classes.dir}">
                                 <filename name="*.class" />
+                                <filename name="*.properties" />
                         </fileset>
                 </copy>              
 	</target>
@@ -106,6 +120,7 @@
 		<javadoc destdir="doc">
 			<fileset dir="src">
 				<include name="**/*.java" />
+                                <include name="**/*.properties" />
 			</fileset>
 		</javadoc>
 	</target>
@@ -115,7 +130,7 @@
 			         <include name="${package.djvu.dir}/**" />
 			         <include name="${package.djvubean.dir}/**" />
 			         <include name="${package.djview.dir}/**" />
-                                 <include name="${package.djvubean.locale}/**" />
+                                 <include name="${package.locale.dir}/**" />
 			         <exclude name="${package.djview.frame.dir}/**" />
 			</fileset>
 			<manifest>
@@ -144,7 +159,15 @@
                                     <attribute name="Implementation-Version" value="${build}" />
                                     <attribute name="Implementation-Vender" value="${package.djview.author}" />
                                 </section>
-				<section name="com.lizardtech.djvubean.DjVuBean.class">
+				<section name="${package.locale.dir}/">
+                                    <attribute name="Specification-Title" value="${package.locale.title}" />
+                                    <attribute name="Specification-Version" value="${version}" />
+                                    <attribute name="Specification-Vender" value="${package.locale.vender}" />
+                                    <attribute name="Implementation-Title" value="${package.locale.dot}" />
+                                    <attribute name="Implementation-Version" value="${build}" />
+                                    <attribute name="Implementation-Vender" value="${package.locale.author}" />
+                                </section>
+                                <section name="com.lizardtech.djvubean.DjVuBean.class">
 					<attribute name="JavaBean" value="True" />
 				</section>
 			</manifest>
@@ -174,9 +197,9 @@
 			<fileset dir="${debug.classes.dir}">
 			         <include name="${package.djvu.dir}/**" />
 			         <include name="${package.djvubean.dir}/**" />
-			         <include name="${package.djview.dir}/**" />
+			         <include name="${package.djview.dir}/**" />                            
+                                 <include name="${package.locale.dir}/**" />       
 			         <exclude name="${package.djview.frame.dir}/**" />
-                                 <include name="${package.djvubean.locale}/**" />
 			</fileset>
 			<manifest>
 				<attribute name="Main-Class" value="${package.djview.main}" />
@@ -204,6 +227,14 @@
                                     <attribute name="Implementation-Version" value="${build}" />
                                     <attribute name="Implementation-Vender" value="${package.djview.author}" />
                                 </section>
+				<section name="${package.locale.dir}/">
+                                    <attribute name="Specification-Title" value="${package.locale.title}" />
+                                    <attribute name="Specification-Version" value="${version}" />
+                                    <attribute name="Specification-Vender" value="${package.locale.vender}" />
+                                    <attribute name="Implementation-Title" value="${package.locale.dot}" />
+                                    <attribute name="Implementation-Version" value="${build}" />
+                                    <attribute name="Implementation-Vender" value="${package.locale.author}" />
+                                </section>                                
 				<section name="com.lizardtech.djvubean.DjVuBean.class">
 					<attribute name="JavaBean" value="True" />
 				</section>
@@ -232,12 +263,12 @@
 	<target name="package" description="package the compiled source" depends="release.jarframe,doc" >
           <zip destfile="${dist.dir}/${project}${version}.zip">
   	    <zipfileset dir="." prefix="${project}${build}" includes="*.txt, *.html" />
-  	    <zipfileset dir="${build.dir}" prefix="${project}${build}/build" includes="*.jar" />
+  	    <zipfileset dir="${build.dir}" prefix="${project}${build}/build" includes="*.jar, *.properties" />
             <zipfileset dir="${release.classes.dir}" prefix="${project}${build}/build" includes="DjVu*.class" />
           </zip>
           <tar destfile="${dist.dir}/${project}${version}.tar.gz" compression="gzip">
   	    <tarfileset dir="." prefix="${project}${build}" includes="*.txt, *.html" />
-  	    <tarfileset dir="${build.dir}" prefix="${project}${build}/build" includes="*.jar" />
+  	    <tarfileset dir="${build.dir}" prefix="${project}${build}/build" includes="*.jar, *.properties" />
   	    <tarfileset dir="${release.classes.dir}" prefix="${project}${build}/build" includes="DjVu*.class" />
           </tar>
           <zip destfile="${dist.dir}/${project}${version}-doc.zip">
@@ -278,7 +309,7 @@
               <arg value="${debug.document}" />
               <jvmarg value="-Xdebug"/>
               <jvmarg value="-Xnoagent"/>
-              <jvmarg value="-Xbootclasspath/p"/>
+              <!-- <jvmarg value="-Xbootclasspath"/> -->
               <jvmarg value="-Djava.compiler=none"/>
               <jvmarg value="-Xrunjdwp:transport=dt_socket,address=${jpda.address}"/>
               <syspropertyset>

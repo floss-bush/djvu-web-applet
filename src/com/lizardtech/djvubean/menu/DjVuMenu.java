@@ -91,6 +91,8 @@ public class DjVuMenu
     // The menuitem used for help.
     private MenuItem helpMenuItem = null;
 
+    
+    private static ResourceBundle _resbundle = ResourceBundle.getBundle("com/lizardtech/locale/DjVuBean", Locale.getDefault());
     //~ Constructors -----------------------------------------------------------
 //  private DjVuBean djvuBean;
     /**
@@ -117,7 +119,7 @@ public class DjVuMenu
         MenuItem retval = aboutMenuItem;
 
         if (retval == null) {
-            retval = new MenuItem("Rreth");
+            retval = new MenuItem(_resbundle.getString("ABOUT"));
             retval.addActionListener(aboutListener);
             aboutMenuItem = retval;
         }
@@ -163,7 +165,7 @@ public class DjVuMenu
             retval = (CheckboxMenuItem) findMenuItem;
 
             if (retval == null) {
-                retval = new CheckboxMenuItem("Kerko");
+                retval = new CheckboxMenuItem(_resbundle.getString("SEARCH"));
                 retval.addItemListener(findListener);
                 findMenuItem = retval;
             }
@@ -183,7 +185,7 @@ public class DjVuMenu
         MenuItem retval = helpMenuItem;
 
         if (retval == null) {
-            retval = new MenuItem("Ndihme");
+            retval = new MenuItem(_resbundle.getString("HELP"));
             retval.addActionListener(helpListener);
             helpMenuItem = retval;
         }
@@ -225,7 +227,7 @@ public class DjVuMenu
             int i = navPane.indexOf(',');
 
             if (i >= 0) {
-                retval = new Menu("Konsultimi");
+                retval = new Menu(_resbundle.getString("VIEW_OPTION"));
 
                 int j = 0;
 
@@ -258,7 +260,7 @@ public class DjVuMenu
         Menu retval = zoomMenu;
 
         if (retval == null) {
-            retval = new Menu("Zoom");
+            retval = new Menu(_resbundle.getString("ZOOM"));
 
             for (int i = 0; i < DjVuBean.ZOOM_STANDARD_LIST.length;) {
                 final CheckboxMenuItem item =
@@ -298,7 +300,7 @@ public class DjVuMenu
     public Menu getPageLayoutMenu() {
         Menu retval = pageLayoutMenu;
         if (retval == null) {
-            retval = new Menu("Vendosja e faqeve");
+            retval = new Menu(_resbundle.getString("PAGE_VIEW"));
 
             for (int i = 0; i < DjVuBean.PAGE_LAYOUT_LIST.length;) {
                 final CheckboxMenuItem item =
@@ -536,7 +538,7 @@ public class DjVuMenu
             final MenuItem[] itemArray,
             final int length) {
         if (length < 2) {
-            itemArray[0].setLabel("Shko tek");
+            itemArray[0].setLabel(_resbundle.getString("GO_TO"));
 
             return (Menu) itemArray[0];
         }

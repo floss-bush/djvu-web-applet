@@ -50,7 +50,10 @@ import com.lizardtech.djvubean.DjVuBean;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.*;
+import java.io.IOException;
 import java.lang.reflect.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 import java.util.ResourceBundle;
 
@@ -88,7 +91,7 @@ public class Toolbar
     private static Method getEditorMethod;
     private static Method addActionListenerMethod;
 
-    private ResourceBundle _resbundle = ResourceBundle.getBundle("com.lizardtech.locale.Toolbar", Locale.getDefault());
+    private static ResourceBundle _resbundle;
     
     static {
         Class xclassComboBox = null;
@@ -192,39 +195,41 @@ public class Toolbar
      */
     public Toolbar(final DjVuBean bean) {
         djvuBean = bean;
+    
+        _resbundle = ResourceBundle.getBundle("com/lizardtech/locale/DjVuBean", Locale.getDefault());
 
-        /** Arguments used to create the page selection combo box. */
-        Object[] PAGE_SELECT = {this._resbundle.getString("select page"), "-", "select.djvu", new Dimension(16, 16)};
+/** Arguments used to create the page selection combo box. */
+        Object[] PAGE_SELECT = {_resbundle.getString("SELECT_PAGE"), "-", "select.djvu", new Dimension(16, 16)};
         /** Arguments used to create the zoom selection combo box. */
-        Object[] ZOOM_SELECT = {this._resbundle.getString("zoom level"), "-", "select.djvu", new Dimension(24, 24)};
+        Object[] ZOOM_SELECT = {_resbundle.getString("ZOOM_LEVEL"), "-", "select.djvu", new Dimension(24, 24)};
 
         pageSelect = createComboBox(PAGE_SELECT);
         zoomSelect = createComboBox(ZOOM_SELECT);
 
-        Object[] FIRST_PAGE_BUTTON = {this._resbundle.getString("first page"), "|<<", "firstpage.djvu", new Dimension(24, 24)};
-        Object[] LAST_PAGE_BUTTON = {this._resbundle.getString("last page"), ">>|", "lastpage.djvu", new Dimension(24, 24)};
+        Object[] FIRST_PAGE_BUTTON = {_resbundle.getString("FIRST_PAGE"), "|<<", "firstpage.djvu", new Dimension(24, 24)};
+        Object[] LAST_PAGE_BUTTON = {_resbundle.getString("LAST_PAGE"), ">>|", "lastpage.djvu", new Dimension(24, 24)};
         Object[] LOGO_BUTTON = {"Biblioteka Universitare Shkoder.", "BUSH", "library_logo.djvu", new Dimension(98, 24)};
-        Object[] NEXT_PAGE_BUTTON = {this._resbundle.getString("next page"), ">", "nextpage.djvu", new Dimension(24, 24)};
-        Object[] PREVIOUS_PAGE_BUTTON = {this._resbundle.getString("previous page"), "<", "prevpage.djvu", new Dimension(24, 24)};
-        Object[] ZOOMIN_BUTTON = {this._resbundle.getString("zoom in"), "+", "zoomin.djvu", new Dimension(24, 24)};
-        Object[] ZOOMOUT_BUTTON = {this._resbundle.getString("zoom out"), "-", "zoomout.djvu", new Dimension(24, 24)};
+        Object[] NEXT_PAGE_BUTTON = {_resbundle.getString("NEXT_PAGE"), ">", "nextpage.djvu", new Dimension(24, 24)};
+        Object[] PREVIOUS_PAGE_BUTTON = {_resbundle.getString("PREVIOUS_PAGE"), "<", "prevpage.djvu", new Dimension(24, 24)};
+        Object[] ZOOMIN_BUTTON = {_resbundle.getString("ZOOM_IN"), "+", "zoomin.djvu", new Dimension(24, 24)};
+        Object[] ZOOMOUT_BUTTON = {_resbundle.getString("ZOOM_OUT"), "-", "zoomout.djvu", new Dimension(24, 24)};
 
-        firstPage = createButton(FIRST_PAGE_BUTTON);
-        lastPage = createButton(LAST_PAGE_BUTTON);
-        logo = createButton(LOGO_BUTTON);
-        logo2 = createButton(LOGO_BUTTON);
-        nextPage = createButton(NEXT_PAGE_BUTTON);
-        prevPage = createButton(PREVIOUS_PAGE_BUTTON);
-        zoomIn = createButton(ZOOMIN_BUTTON);
-        zoomOut = createButton(ZOOMOUT_BUTTON);
+        firstPage = createToggleButton(FIRST_PAGE_BUTTON);
+        lastPage = createToggleButton(LAST_PAGE_BUTTON);
+        logo = createToggleButton(LOGO_BUTTON);
+        logo2 = createToggleButton(LOGO_BUTTON);
+        nextPage = createToggleButton(NEXT_PAGE_BUTTON);
+        prevPage = createToggleButton(PREVIOUS_PAGE_BUTTON);
+        zoomIn = createToggleButton(ZOOMIN_BUTTON);
+        zoomOut = createToggleButton(ZOOMOUT_BUTTON);
 
-        Object[] SEARCH_BUTTON = {this._resbundle.getString("search"), "Search", "search.djvu", new Dimension(24, 24)};
-        Object[] ACTUAL_SIZE_BUTTON = {this._resbundle.getString("actual size"), "100%", "actualsi.djvu", new Dimension(24, 24)};
-        Object[] FIT_PAGE_BUTTON = {this._resbundle.getString("fit page"), "FitPage", "fitpage.djvu", new Dimension(24, 24)};
-        Object[] FIT_WIDTH_BUTTON = {this._resbundle.getString("fit width"), "FitWidth", "fitwidth.djvu", new Dimension(24, 24)};
-        Object[] PAN_MODE_BUTTON = {this._resbundle.getString("pan"), "Pan", "hand.djvu", new Dimension(24, 24)};
-        Object[] ZOOM_MODE_BUTTON = {this._resbundle.getString("zoom mode"), "Zoom", "zoomselect.djvu", new Dimension(24, 24)};
-        Object[] TEXT_MODE_BUTTON = {this._resbundle.getString("text mode"), "Text", "textselect.djvu", new Dimension(24, 24)};
+        Object[] SEARCH_BUTTON = {_resbundle.getString("SEARCH"), "Search", "search.djvu", new Dimension(24, 24)};
+        Object[] ACTUAL_SIZE_BUTTON = {_resbundle.getString("ACTUAL_SIZE"), "100%", "actualsi.djvu", new Dimension(24, 24)};
+        Object[] FIT_PAGE_BUTTON = {_resbundle.getString("FIT_PAGE"), "FitPage", "fitpage.djvu", new Dimension(24, 24)};
+        Object[] FIT_WIDTH_BUTTON = {_resbundle.getString("FIT_WIDTH"), "FitWidth", "fitwidth.djvu", new Dimension(24, 24)};
+        Object[] PAN_MODE_BUTTON = {_resbundle.getString("PAN"), "Pan", "hand.djvu", new Dimension(24, 24)};
+        Object[] ZOOM_MODE_BUTTON = {_resbundle.getString("ZOOM_MODE"), "Zoom", "zoomselect.djvu", new Dimension(24, 24)};
+        Object[] TEXT_MODE_BUTTON = {_resbundle.getString("TEXT_MODE"), "Text", "textselect.djvu", new Dimension(24, 24)};
         
         searchMode = createToggleButton(SEARCH_BUTTON);
         actualSize = createToggleButton(ACTUAL_SIZE_BUTTON);
@@ -365,7 +370,7 @@ public class Toolbar
                     djvuBean.setSubmit(
                             djvuBean.properties.getProperty(
                             "logourl",
-                            "http://www.bu-unishk.org"));
+                            "http://bush.unishk.edu.al"));
                 } else if (firstPage == source) {
                     djvuBean.setPageString(DjVuBean.FIRST_PAGE);
                 } else if (prevPage == source) {
@@ -790,19 +795,30 @@ public class Toolbar
      * @return the newly created toggle button.
      */
     protected ToggleButton createToggleButton(final Object[] args) {
-        final String tip =
-                ((args.length > 0) && (args[0] != null))
-                ? args[0].toString()
-                : null;
-        final String text =
-                ((args.length > 1) && (args[1] != null))
-                ? args[1].toString()
-                : null;
+        String tip = new String();
+        String text = new String();
+        try{
+             tip =
+                    ((args.length > 0) && (args[0] != null))
+                    ? args[0].toString()
+                    : null;
+        } catch(final Throwable exp) {
+            System.out.println(exp.getMessage());
+        }
+        try{
+            text =
+                    ((args.length > 1) && (args[1] != null))
+                    ? args[1].toString()
+                    : null;
+        } catch(final Throwable exp) {
+            System.out.println(exp.getMessage());
+        }      
         final Object imageArg = args[2];
         final Dimension size =
                 ((args.length > 3) && (args[3] instanceof Dimension))
                 ? (Dimension) args[3]
                 : new Dimension(-1, -1);
+        
         final ToggleButton retval =
                 new ToggleButton(
                 tip,
@@ -813,10 +829,6 @@ public class Toolbar
                 size,
                 false);
 
-//    JToggleButton retval =
-//      new ToggleButton((icon == null)
-//        ? text
-//        : null, icon, selected);
         retval.setActionCommand(tip);
         toggleButtonList.addElement(retval);
 
