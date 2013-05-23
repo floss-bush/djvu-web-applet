@@ -185,7 +185,8 @@ public class Applet
 
                 if (retval == null) {
                     retval = new Panel();
-                    retval.setBackground(new Color(128, 128, 128));
+                    retval.setBackground(new Color(255, 255, 255));
+                    
 
                     final CardLayout cardLayout = new CardLayout();
                     retval.setLayout(cardLayout);
@@ -558,7 +559,7 @@ public class Applet
     }
 
     /**
-     * Called when a DjVuBean propery has changed.
+     * Called when a DjVuBean property has changed.
      *
      * @param event describing the property change.
      */
