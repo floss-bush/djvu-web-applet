@@ -65,12 +65,12 @@ import java.util.ResourceBundle;
  * @author $author$
  * @version $Revision: 1.43 $
  */
-public class DjVuBean
+public class DjVuBean 
         extends Panel
         implements PropertyChangeListener, DjVuInterface, java.io.Serializable, Runnable {
     //~ Static fields/initializers ---------------------------------------------
 
-    private static ResourceBundle _resbundle = ResourceBundle.getBundle("com/lizardtech/locale/DjVuBean", Locale.getDefault());
+        private static ResourceBundle _resbundle = ResourceBundle.getBundle("com/lizardtech/locale/DjVuBean", Locale.getDefault());
 
     // Just an empty string.
     private static final String NILL = "";

@@ -195,7 +195,8 @@ public class Toolbar
      */
     public Toolbar(final DjVuBean bean) {
         djvuBean = bean;
-    
+        
+        //Locale cLocale = Locale.forLanguageTag("sq-AL");
         _resbundle = ResourceBundle.getBundle("com/lizardtech/locale/DjVuBean", Locale.getDefault());
 
 /** Arguments used to create the page selection combo box. */
@@ -214,14 +215,14 @@ public class Toolbar
         Object[] ZOOMIN_BUTTON = {_resbundle.getString("ZOOM_IN"), "+", "zoomin.djvu", new Dimension(24, 24)};
         Object[] ZOOMOUT_BUTTON = {_resbundle.getString("ZOOM_OUT"), "-", "zoomout.djvu", new Dimension(24, 24)};
 
-        firstPage = createToggleButton(FIRST_PAGE_BUTTON);
-        lastPage = createToggleButton(LAST_PAGE_BUTTON);
-        logo = createToggleButton(LOGO_BUTTON);
-        logo2 = createToggleButton(LOGO_BUTTON);
-        nextPage = createToggleButton(NEXT_PAGE_BUTTON);
-        prevPage = createToggleButton(PREVIOUS_PAGE_BUTTON);
-        zoomIn = createToggleButton(ZOOMIN_BUTTON);
-        zoomOut = createToggleButton(ZOOMOUT_BUTTON);
+        firstPage = createButton(FIRST_PAGE_BUTTON);
+        lastPage = createButton(LAST_PAGE_BUTTON);
+        logo = createButton(LOGO_BUTTON);
+        logo2 = createButton(LOGO_BUTTON);
+        nextPage = createButton(NEXT_PAGE_BUTTON);
+        prevPage = createButton(PREVIOUS_PAGE_BUTTON);
+        zoomIn = createButton(ZOOMIN_BUTTON);
+        zoomOut = createButton(ZOOMOUT_BUTTON);
 
         Object[] SEARCH_BUTTON = {_resbundle.getString("SEARCH"), "Search", "search.djvu", new Dimension(24, 24)};
         Object[] ACTUAL_SIZE_BUTTON = {_resbundle.getString("ACTUAL_SIZE"), "100%", "actualsi.djvu", new Dimension(24, 24)};
@@ -231,13 +232,13 @@ public class Toolbar
         Object[] ZOOM_MODE_BUTTON = {_resbundle.getString("ZOOM_MODE"), "Zoom", "zoomselect.djvu", new Dimension(24, 24)};
         Object[] TEXT_MODE_BUTTON = {_resbundle.getString("TEXT_MODE"), "Text", "textselect.djvu", new Dimension(24, 24)};
         
-        searchMode = createToggleButton(SEARCH_BUTTON);
-        actualSize = createToggleButton(ACTUAL_SIZE_BUTTON);
-        fitPage = createToggleButton(FIT_PAGE_BUTTON);
-        fitWidth = createToggleButton(FIT_WIDTH_BUTTON);
-        panMode = createToggleButton(PAN_MODE_BUTTON);
-        zoomMode = createToggleButton(ZOOM_MODE_BUTTON);
-        textMode = createToggleButton(TEXT_MODE_BUTTON);
+        searchMode = createButton(SEARCH_BUTTON);
+        actualSize = createButton(ACTUAL_SIZE_BUTTON);
+        fitPage = createButton(FIT_PAGE_BUTTON);
+        fitWidth = createButton(FIT_WIDTH_BUTTON);
+        panMode = createButton(PAN_MODE_BUTTON);
+        zoomMode = createButton(ZOOM_MODE_BUTTON);
+        textMode = createButton(TEXT_MODE_BUTTON);
 
         logo.setBorderType(ToggleButton.NOBORDER);
         logo2.setBorderType(ToggleButton.NOBORDER);
@@ -1019,7 +1020,7 @@ public class Toolbar
     private void updatePage(final Integer pagenoNumber) {
         final int pageno = pagenoNumber.intValue();
         removeItemListenerComboBox(pageSelect, this);
-
+        System.out.println("page asht : " + pagenoNumber);
         try {
             setSelectedItemComboBox(pageSelect, pagenoNumber);
         } finally {

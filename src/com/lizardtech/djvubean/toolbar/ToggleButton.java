@@ -199,7 +199,7 @@ public class ToggleButton
    * @return actionCommand string.
    */
   public String getActionCommand()
-  {
+  { 
     return actionCommand;
   }
 

@@ -90,7 +90,6 @@ public class DjVuMenu
     private MenuItem findMenuItem = null;
     // The menuitem used for help.
     private MenuItem helpMenuItem = null;
-
     
     private static ResourceBundle _resbundle = ResourceBundle.getBundle("com/lizardtech/locale/DjVuBean", Locale.getDefault());
     //~ Constructors -----------------------------------------------------------
@@ -138,7 +137,7 @@ public class DjVuMenu
         //         "http://bitbucket.org/gjergj.sheldija/djvu-web-viewer/" + (com.lizardtech.djvu.DjVuOptions.VERSION.replace('_', '/')) + "/wiki/Home/");
         return getDjVuBean().properties.getProperty(
                 "abouturl",
-                "http://bitbucket.org/gjergj.sheldija/djvu-web-viewer/wiki/Home/");
+                "https://github.com/gjergjsheldija/djvu-web-applet");
 
     }
 
@@ -201,7 +200,7 @@ public class DjVuMenu
     public String getHelpURL() {
         return getDjVuBean().properties.getProperty(
                 "helpurl",
-                "http://bitbucket.org/gjergj.sheldija/djvu-web-viewer/wiki/Home");
+                "https://github.com/gjergjsheldija/djvu-web-applet");
     }
 
     /**
