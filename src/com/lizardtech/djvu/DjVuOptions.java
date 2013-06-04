@@ -66,7 +66,7 @@ public class DjVuOptions
   //~ Static fields/initializers ---------------------------------------------
 
   /** The build version of this code. */
-  public static final String VERSION="0_8_09";
+  public static final String VERSION="0_8_10";
   
   /** This should not be changed unless you know what you are doing. */
   public static boolean NOCTX_BUCKET_UPPER = false;
@@ -88,7 +88,7 @@ public class DjVuOptions
    * basis.  This greatly slows down the code, but it may be neccessary
    * for a low memory device.
    */
-  public static boolean COLLECT_GARBAGE = false;
+  public static boolean COLLECT_GARBAGE = true;
   
   public static PrintStream out=System.out;
   public static PrintStream err=System.err;
