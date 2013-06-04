@@ -246,7 +246,9 @@ public class DataPool
           {
             try
             {
-              URLConnection connection=url.openConnection();
+              URLConnection connection = null;
+              connection=url.openConnection();
+              connection.setUseCaches(false);              
               if(connection instanceof HttpURLConnection)
               {
                 connection.setRequestProperty("Range", "bytes="+start+"-"+(end-1));
